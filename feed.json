@@ -7,6 +7,39 @@
 	"items": [
 		
 			{
+				"id": "http://versun.micro.blog/2024/04/19/ai-chatdev.html",
+				
+				"content_html": "<p>发现一个很好玩的AI应用: ChatDev<br>\n可以模拟一家虚拟软件公司，定义不同角色的代理，比如产品, 程序员, 测试, 设计等 <br>\n然后你做为甲方给一个命题，让它们自己去讨论实现<br>\n这可不是玩具，人家是有正儿八经的论文做支撑的: 软件开发代理的经验协同学习框架 <br>\n<a href=\"https://github.com/OpenBMB/ChatDev\">项目</a>, <a href=\"https://arxiv.org/abs/2312.17025\">论文</a></p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "发现一个很好玩的AI应用: ChatDev   \r\n可以模拟一家虚拟软件公司，定义不同角色的代理，比如产品, 程序员, 测试, 设计等    \r\n然后你做为甲方给一个命题，让它们自己去讨论实现   \r\n这可不是玩具，人家是有正儿八经的论文做支撑的: 软件开发代理的经验协同学习框架    \r\n[项目](https://github.com/OpenBMB/ChatDev), [论文](https://arxiv.org/abs/2312.17025)   \n\n<img src=\"uploads/2024/replay.gif\" width=\"600\" height=\"334\" alt=\"\">\n",
+				"date_published": "2024-04-19T15:37:41+08:00",
+				"url": "https://versun.me/2024/04/19/ai-chatdev.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/19/til-python-requirementstxt.html",
+				
+				"content_html": "<p>TIL: 错误地在全局 Python 环境中安装了软件包？<br>\n使用空白 requirements.txt 运行 pip-sync ，可进行清理 <a href=\"https://x.com/_TylerHillery/status/1777707017328877676\">[via]</a></p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "TIL: 错误地在全局 Python 环境中安装了软件包？   \r\n使用空白 requirements.txt 运行 pip-sync ，可进行清理 [[via]](https://x.com/_TylerHillery/status/1777707017328877676)\n\n<img src=\"uploads/2024/5e2f9560-49e0-481a-8fa7-c57642edbe69-1040x406.jpg\" width=\"600\" height=\"234\" alt=\"\">\n",
+				"date_published": "2024-04-19T11:23:34+08:00",
+				"url": "https://versun.me/2024/04/19/til-python-requirementstxt.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/19/linuxpop-oscosmic-rustalpha.html",
+				
+				"content_html": "<p>在Linux系统上，我目前最期待的软件就是Pop OS正在开发的Cosmic桌面环境<br>\n从零使用Rust开始编写，预计今年7月份发布alpha版本<br>\nPop OS也是我目前主用的Linux系统桌面发行版，开箱即用，体验非常好。<br>\n<a href=\"https://github.com/pop-os/cosmic-epoch\">github.com/pop-os/co&hellip;</a></p>\n",
+				"content_text": "在Linux系统上，我目前最期待的软件就是Pop OS正在开发的Cosmic桌面环境   \n从零使用Rust开始编写，预计今年7月份发布alpha版本   \nPop OS也是我目前主用的Linux系统桌面发行版，开箱即用，体验非常好。   \n[github.com/pop-os/co...](https://github.com/pop-os/cosmic-epoch)\n",
+				"date_published": "2024-04-19T09:44:21+08:00",
+				"url": "https://versun.me/2024/04/19/linuxpop-oscosmic-rustalpha.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/18/til-httpszhwikipediaorgwikiebaeebbeacebafebb.html",
+				
+				"content_html": "<p>TIL: 才发现亚洲不仅有泛亚铁路，还有 泛亚公路！<br>\n从日本能开车到上海！！  (轮船到韩国)<br>\n<a href=\"https://zh.wikipedia.org/wiki/%E4%BA%9E%E6%B4%B2%E5%85%AC%E8%B7%AF%E7%B6%B2\">zh.wikipedia.org/wiki/%E4%&hellip;</a></p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "TIL: 才发现亚洲不仅有泛亚铁路，还有 泛亚公路！  \n从日本能开车到上海！！  (轮船到韩国)   \n[zh.wikipedia.org/wiki/%E4%...](https://zh.wikipedia.org/wiki/%E4%BA%9E%E6%B4%B2%E5%85%AC%E8%B7%AF%E7%B6%B2)  \n\n\n<img src=\"uploads/2024/asian-highways.png\" width=\"453\" height=\"600\" alt=\"\">\n",
+				"date_published": "2024-04-18T14:18:42+08:00",
+				"url": "https://versun.me/2024/04/18/til-httpszhwikipediaorgwikiebaeebbeacebafebb.html",
+				"tags": ["TIL"]
+			},
+			{
 				"id": "http://versun.micro.blog/2024/04/18/063143.html",
 				
 				"content_html": "<p>Google Gemini真的是不想让人用，gemini-pro不支持system_instruction参数（类system message），只有gemini-1.5-pro才支持， 那我还得给这2个模型写2个方法？ 无法理解。 <br>\n只能设置为&quot;only support gemini-1.5-pro-latest&quot;</p>\n",
