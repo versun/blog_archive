@@ -25,6 +25,345 @@
 	  <div class="h-entry">
 		
 
+		<a href="https://versun.me/2024/04/29/roadmaps-ai.html" class="u-url"><time class="dt-published" datetime="2024-04-29 16:53:40 &#43;0800">Apr 29, 2024</time></a>
+
+		<div class="e-content">
+			 <p>刚发现，专门做开发人员学习路线图的<a href="https://roadmap.sh/">Roadmaps</a>，添加了好多内容，<br>
+特别是每个节点都有推荐的学习资料，还有个AI定制学习路线，简直不要太方便了</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://versun.me/2024/04/24/092845.html">我的Home Server迁移记录</a></h1>
+		
+
+		<a href="https://versun.me/2024/04/24/092845.html" class="u-url"><time class="dt-published" datetime="2024-04-27 07:50:34 &#43;0800">Apr 27, 2024</time></a>
+
+		<div class="e-content">
+			 <p>本篇文章记录了我的Home server从原先的 Debian + Yunohost 迁移到 Ubuntu + <a href="https://dockge.kuma.pet">Dockge</a>的过程<br>
+迁移理由：</p>
+<ol>
+<li>为了装更多应用压榨VPS的8G内存</li>
+<li>使用docker方便调试和开发</li>
+<li>Yunohost很多应用的更新没法及时跟上</li>
+<li>Caddy在Debian下有很多小问题，Ubuntu就能一键启用，很奇怪</li>
+</ol>
+<h2 id="备份已有应用的数据">备份已有应用的数据</h2>
+<p>好在所有的应用都提供了导出数据功能，所以很快就完成了备份</p>
+<h2 id="初始化系统">初始化系统</h2>
+<ol>
+<li>将系统重装为Ubuntu 22.04后，升级重启。</li>
+<li>安装必需软件：<code>apt install vim sudo curl uidmap fail2ban -y</code></li>
+<li>启用fail2ban：<code>systemctl enable fail2ban</code></li>
+<li>创建非root用户：<code>adduser versun</code></li>
+<li>将versun用户加入sudo：<code>visudo</code></li>
+<li>配置sshd：<code>vim /etc/ssh/sshd_config</code> 禁止root登陆和密码登陆</li>
+</ol>
+<pre tabindex="0"><code>PasswordAuthentication no
+PermitRootLogin no
+</code></pre><ol start="7">
+<li>重启sshd服务：<code>sudo systemctl restart sshd</code></li>
+<li>给versun用户添加ssh public key</li>
+</ol>
+<pre tabindex="0"><code>su versun
+mkdir ~/.ssh
+echo &quot;Your ssh public key&quot; &gt; ~/.ssh/authorized_keys
+
+sudo chmod 600 ~/.ssh/authorized_keys
+</code></pre><ol start="9">
+<li>新建一个终端使用versun账户和密钥确保能登陆成功。</li>
+</ol>
+<h2 id="安装docker">安装Docker</h2>
+<p>根据<a href="https://docs.docker.com/engine/install/ubuntu/">官方文档</a>安装即可<br>
+将versun账户添加到 docker 组，以便以非root用户身份运行 Docker 命令：<code>sudo usermod -aG docker versun</code><br>
+重启或者重新登陆versun账户</p>
+<h2 id="安装caddy">安装Caddy</h2>
+<p>同样，根据<a href="https://caddyserver.com/docs/install">官方文档</a>安装即可</p>
+<h2 id="安装dockge">安装Dockge</h2>
+<p><a href="https://github.com/louislam/dockge?tab=readme-ov-file#basic">官方安装步骤</a>如下：</p>
+<pre tabindex="0"><code>#Create directories that store your stacks and stores Dockge's stack
+mkdir -p /opt/stacks /opt/dockge
+cd /opt/dockge
+
+#Download the compose.yaml
+curl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml
+</code></pre><p>在下载完compose.yaml后，我们需要修改端口，将<code>- 5001:5001</code>改为<code>- 127.0.0.1:5001:5001</code>  <br>
+因为我使用caddy来代理服务，所以就限制它只能通过本地访问，而不是暴露到外网。<br>
+然后启动服务：<code>docker compose up -d</code></p>
+<h2 id="配置caddyfile">配置Caddyfile</h2>
+<p>修改/etc/caddy/Caddyfile，内容参考如下</p>
+<pre tabindex="0"><code>{
+        log {
+                output file /var/log/caddy/versun.log
+        }
+}
+dockge.example.com {
+        reverse_proxy localhost:5001
+}
+blog.example.com {
+        reverse_proxy localhost:8001
+}
+</code></pre><p>个人比较喜欢使用subdomain的形式，但每个subdomain都要在域名服务商那添加，你也可以使用子路径形式，更方便：</p>
+<pre tabindex="0"><code>versun.me {
+        reverse_proxy /dockge/* localhost:5001
+        reverse_proxy /blog/* localhost:8001
+}
+</code></pre><p>修改完后，格式化下文件：<code>sudo caddy fmt /etc/caddy/Caddyfile --overwrite</code> <br>
+然后重载配置：<code>sudo systemctl reload caddy</code></p>
+<h2 id="配置cloudflare的dns记录">配置Cloudflare的DNS记录</h2>
+<p>强烈建议使用Cloudflare来管理DNS记录，不仅有免费CDN，还有免费的代理防止服务器IP泄漏，还有防基础的DDOS。<br>
+添加A记录到你的服务器IP，并开启Proxy<br>
+然后在左侧面板，选择<code>SSL/TLS</code>，将加密模式设置为完全（Full）<br>
+过1分钟左右，通过域名应该就能访问到你的服务了。</p>
+<h2 id="安装应用">安装应用</h2>
+<p>之后就是在Dockage上安装Docker应用，基本步骤如下：</p>
+<ol>
+<li>修改应用的docker compose内容中的port为只监听本地</li>
+<li>修改caddyfile配置文件，添加服务端口</li>
+<li>重启caddy</li>
+<li>配置DNS记录</li>
+</ol>
+<p>注意：如果有需要映射文件夹的，需要确保映射到当前路径：<code>./</code>，这样才能确保所有数据都在<code>/opt/stacks</code>里面。</p>
+<h2 id="定时备份docker数据">定时备份docker数据</h2>
+<p>我使用<a href="https://www.backblaze.com/docs/cloud-storage-command-line-tools">backblaze</a>的b2服务。</p>
+<ol>
+<li>
+<p>下载官方的<a href="https://github.com/Backblaze/B2_Command_Line_Tool/releases/latest/download/b2-linux">b2程序</a></p>
+</li>
+<li>
+<p>执行命令：</p>
+<pre tabindex="0"><code>chmod a+x b2-linux
+sudo mv b2-linux /usr/bin/b2
+</code></pre></li>
+<li>
+<p>在backblaze上<a href="https://secure.backblaze.com/b2_buckets.htm">创建</a>私有存储桶和新的[应用密钥]
+(<a href="https://secure.backblaze.com/app_keys.htm">https://secure.backblaze.com/app_keys.htm</a>)</p>
+</li>
+<li>
+<p>使用root完成认证: <code>sudo b2 authorize-account</code></p>
+</li>
+<li>
+<p>首次上传：<code>sudo b2 sync /opt/stacks/ b2://Your-Bucket-Name/</code></p>
+</li>
+<li>
+<p>创建cron定时任务：<code>sudo crontab -e</code></p>
+<pre tabindex="0"><code># 每周一的3点上传一次，以本地版本为准，旧版本保留30天，
+0 3 * * 1 /usr/bin/b2 sync --keepDays 30 --replaceNewer --delete /opt/stacks/ b2://Your-Bucket-Name/  &gt;&gt; /var/log/b2sync.log 2&gt;&amp;1
+</code></pre></li>
+</ol>
+<p>完成</p>
+<h2 id="其它">其它</h2>
+<p>你也可以安装一个Homepage，方便汇总所有的服务，挑一个吧：<a href="https://gethomepage.dev">Homepage</a>, <a href="https://dashy.to/">Dashy</a>, <a href="https://github.com/bastienwirtz/homer">Homer</a>, <a href="https://homarr.dev/">Homarr</a> <br>
+如果没有自带认证的，可以<a href="https://joshstrange.com/2020/01/13/securing-your-self-hosted-apps-with-single-signon/">使用caddy来做认证</a></p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/26/commafeedminiflux.html" class="u-url"><time class="dt-published" datetime="2024-04-26 18:03:25 &#43;0800">Apr 26, 2024</time></a>
+
+		<div class="e-content">
+			 <p>CommaFeed的移动端界面比Miniflux好用很多</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/26/100335.html" class="u-url"><time class="dt-published" datetime="2024-04-26 10:03:35 &#43;0800">Apr 26, 2024</time></a>
+
+		<div class="e-content">
+			 <p>我每周最勇敢的时刻：将“全部标为已读”</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/26/home-server-debian.html" class="u-url"><time class="dt-published" datetime="2024-04-26 09:26:45 &#43;0800">Apr 26, 2024</time></a>
+
+		<div class="e-content">
+			 <p>总算忙完工作了，我要开始重装我的 Home Server 了<br>
+从原先的 Debian + Yunohost 系统转为Ubuntu + Dockge<br>
+理由：</p>
+<ol>
+<li>为了装更多应用压榨VPS的8G内存</li>
+<li>使用docker方便调试</li>
+<li>Yunohost很多应用的更新没法及时跟上</li>
+<li>Caddy在Debian下有很多小问题，Ubuntu就能一键启用，很奇怪</li>
+</ol>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/26/pegasusdjango-saas-htmxcssbulmatailwind.html" class="u-url"><time class="dt-published" datetime="2024-04-26 09:14:16 &#43;0800">Apr 26, 2024</time></a>
+
+		<div class="e-content">
+			 <p><a href="https://www.saaspegasus.com/">Pegasus</a>的Django SaaS模板看起来很不错啊<br>
+前端用htmx，CSS框架可选bulma和tailwind，<br>
+还内置了登录系统和Stripe订阅，还有REST API，省了很多事情，就是稍微有点贵</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/26/cpuweb-nand.html" class="u-url"><time class="dt-published" datetime="2024-04-26 08:28:27 &#43;0800">Apr 26, 2024</time></a>
+
+		<div class="e-content">
+			 <p>好希望我也能写出这么个玩具来<br>
+一台图灵16位计算机，实现了CPU、汇编器、虚拟机翻译器和编译器的规范，同时将该平台移植到web上，并集成开发环境和用户界面<br>
+<a href="https://github.com/ArhanChaudhary/NAND">NAND</a></p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/26/isp-start-your.html" class="u-url"><time class="dt-published" datetime="2024-04-26 08:16:54 &#43;0800">Apr 26, 2024</time></a>
+
+		<div class="e-content">
+			 <p>不要再折腾软路由了，试一试搭个ISP🤣   <br>
+<a href="https://startyourownisp.com/">Start Your Own ISP</a></p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/26/rss.html" class="u-url"><time class="dt-published" datetime="2024-04-26 06:04:53 &#43;0800">Apr 26, 2024</time></a>
+
+		<div class="e-content">
+			 <p>昨晚是不是发生了什么？<br>
+国内的RSS都挂了，刚刚手动更新后恢复了</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/25/pythonformat-country-pythonmystr.html" class="u-url"><time class="dt-published" datetime="2024-04-25 21:05:59 &#43;0800">Apr 25, 2024</time></a>
+
+		<div class="e-content">
+			 <p>原来python的format函数是必需给所有的占位符赋值的，不能只赋值其中一个。<br>
+比如下面的代码会报错，因为country没有赋值</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">my_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;My name is </span><span style="color:#e6db74">{name}</span><span style="color:#e6db74">, I&#39;m from </span><span style="color:#e6db74">{country}</span><span style="color:#e6db74">&#34;</span>     
+print( my_str<span style="color:#f92672">.</span>format(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;Versun&#39;</span>) )     
+</code></pre></div><p>所以如果对于用户输入的字符串，比如用于AI的提示词，用replace更合适些。</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/25/justin-dukestripebuttondown.html" class="u-url"><time class="dt-published" datetime="2024-04-25 15:34:14 &#43;0800">Apr 25, 2024</time></a>
+
+		<div class="e-content">
+			 <p>分享篇文章&lt;<a href="https://jmduke.com/posts/essays/two-years/">做为独立开发者的这两年</a>&gt;，作者Justin Duke从Stripe公司离职后，创办了Buttondown，做为独立开发者，工作生活难平衡，虽灵活但更孤独，而且收入并没有比工作时的多。
+“但是，如果你认为它可能适合你，如果不是现在，那是什么时候？”</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/25/jsgorustpython.html" class="u-url"><time class="dt-published" datetime="2024-04-25 15:33:36 &#43;0800">Apr 25, 2024</time></a>
+
+		<div class="e-content">
+			 <p>朋友：“我现在学哪个编程语言能战未来？”
+我：“前端JS，后端Go，底层Rust”
+朋友：“那你学的是哪个？”
+我：“Python”</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/25/feed-feed-rss.html" class="u-url"><time class="dt-published" datetime="2024-04-25 07:56:42 &#43;0800">Apr 25, 2024</time></a>
+
+		<div class="e-content">
+			 <p>早上才发现我博客的feed链接有问题。。。。。<br>
+现在修复了<br>
+Feed: <a href="https://versun.me/feed">rss</a>, <a href="https://versun.me/feed.json">json</a></p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/25/075015.html" class="u-url"><time class="dt-published" datetime="2024-04-25 07:50:15 &#43;0800">Apr 25, 2024</time></a>
+
+		<div class="e-content">
+			 <p>&ldquo;我可不能接受周末休息是为了有力气去上班&quot;😄</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/24/rss-ai-deeplgpt.html" class="u-url"><time class="dt-published" datetime="2024-04-24 14:24:10 &#43;0800">Apr 24, 2024</time></a>
+
+		<div class="e-content">
+			 <p>总算给 RSS翻译器 添加了 AI 摘要功能，可单独指定引擎，比如翻译使用DeepL，摘要使用GPT，完美配合。<br>
+还加了摘要细粒度控制，对长文更友好。<br>
+同时还优化了 AI 提示词的设置，现在可以给每个RSS源添加额外的提示词，方便针对性优化</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/24/122325.html" class="u-url"><time class="dt-published" datetime="2024-04-24 12:46:32 &#43;0800">Apr 24, 2024</time></a>
+
+		<div class="e-content">
+			 <p>人变老的一个迹象就是喜欢看照片。<br>
+以前是拍了没时间看，现在是有时间就看</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/04/24/dwarkesh-patelpodcastmetallamaquesthorizon-meta.html" class="u-url"><time class="dt-published" datetime="2024-04-24 11:32:31 &#43;0800">Apr 24, 2024</time></a>
+
+		<div class="e-content">
+			 <p>看完 扎克伯格和Dwarkesh Patel访谈<a href="https://www.dwarkeshpatel.com/p/mark-zuckerberg">podcast</a>，总算明白Meta为啥要开源Llama大模型和开放Quest的Horizon系统<br>
+虽然对Meta没好感，但还是佩服扎克伯格的战略眼光</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
 		<a href="https://versun.me/2024/04/19/ai-chatdev.html" class="u-url"><time class="dt-published" datetime="2024-04-19 15:37:41 &#43;0800">Apr 19, 2024</time></a>
 
 		<div class="e-content">
