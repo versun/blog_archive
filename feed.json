@@ -7,10 +7,147 @@
 	"items": [
 		
 			{
+				"id": "http://versun.micro.blog/2024/04/29/roadmaps-ai.html",
+				
+				"content_html": "<p>刚发现，专门做开发人员学习路线图的<a href=\"https://roadmap.sh/\">Roadmaps</a>，添加了好多内容，<br>\n特别是每个节点都有推荐的学习资料，还有个AI定制学习路线，简直不要太方便了</p>\n<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>\n",
+				"content_text": "刚发现，专门做开发人员学习路线图的[Roadmaps](https://roadmap.sh/)，添加了好多内容，   \r\n特别是每个节点都有推荐的学习资料，还有个AI定制学习路线，简直不要太方便了     \r\n\r\n\n\n<img src=\"uploads/2024/detail.png\" width=\"600\" height=\"288\" alt=\"\"><img src=\"uploads/2024/ai.png\" width=\"600\" height=\"305\" alt=\"\">\n",
+				"date_published": "2024-04-29T16:53:40+08:00",
+				"url": "https://versun.me/2024/04/29/roadmaps-ai.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/24/092845.html",
+				"title": "我的Home Server迁移记录",
+				"content_html": "<p>本篇文章记录了我的Home server从原先的 Debian + Yunohost 迁移到 Ubuntu + <a href=\"https://dockge.kuma.pet\">Dockge</a>的过程<br>\n迁移理由：</p>\n<ol>\n<li>为了装更多应用压榨VPS的8G内存</li>\n<li>使用docker方便调试和开发</li>\n<li>Yunohost很多应用的更新没法及时跟上</li>\n<li>Caddy在Debian下有很多小问题，Ubuntu就能一键启用，很奇怪</li>\n</ol>\n<h2 id=\"备份已有应用的数据\">备份已有应用的数据</h2>\n<p>好在所有的应用都提供了导出数据功能，所以很快就完成了备份</p>\n<h2 id=\"初始化系统\">初始化系统</h2>\n<ol>\n<li>将系统重装为Ubuntu 22.04后，升级重启。</li>\n<li>安装必需软件：<code>apt install vim sudo curl uidmap fail2ban -y</code></li>\n<li>启用fail2ban：<code>systemctl enable fail2ban</code></li>\n<li>创建非root用户：<code>adduser versun</code></li>\n<li>将versun用户加入sudo：<code>visudo</code></li>\n<li>配置sshd：<code>vim /etc/ssh/sshd_config</code> 禁止root登陆和密码登陆</li>\n</ol>\n<pre tabindex=\"0\"><code>PasswordAuthentication no\nPermitRootLogin no\n</code></pre><ol start=\"7\">\n<li>重启sshd服务：<code>sudo systemctl restart sshd</code></li>\n<li>给versun用户添加ssh public key</li>\n</ol>\n<pre tabindex=\"0\"><code>su versun\nmkdir ~/.ssh\necho &quot;Your ssh public key&quot; &gt; ~/.ssh/authorized_keys\n\nsudo chmod 600 ~/.ssh/authorized_keys\n</code></pre><ol start=\"9\">\n<li>新建一个终端使用versun账户和密钥确保能登陆成功。</li>\n</ol>\n<h2 id=\"安装docker\">安装Docker</h2>\n<p>根据<a href=\"https://docs.docker.com/engine/install/ubuntu/\">官方文档</a>安装即可<br>\n将versun账户添加到 docker 组，以便以非root用户身份运行 Docker 命令：<code>sudo usermod -aG docker versun</code><br>\n重启或者重新登陆versun账户</p>\n<h2 id=\"安装caddy\">安装Caddy</h2>\n<p>同样，根据<a href=\"https://caddyserver.com/docs/install\">官方文档</a>安装即可</p>\n<h2 id=\"安装dockge\">安装Dockge</h2>\n<p><a href=\"https://github.com/louislam/dockge?tab=readme-ov-file#basic\">官方安装步骤</a>如下：</p>\n<pre tabindex=\"0\"><code>#Create directories that store your stacks and stores Dockge's stack\nmkdir -p /opt/stacks /opt/dockge\ncd /opt/dockge\n\n#Download the compose.yaml\ncurl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml\n</code></pre><p>在下载完compose.yaml后，我们需要修改端口，将<code>- 5001:5001</code>改为<code>- 127.0.0.1:5001:5001</code>  <br>\n因为我使用caddy来代理服务，所以就限制它只能通过本地访问，而不是暴露到外网。<br>\n然后启动服务：<code>docker compose up -d</code></p>\n<h2 id=\"配置caddyfile\">配置Caddyfile</h2>\n<p>修改/etc/caddy/Caddyfile，内容参考如下</p>\n<pre tabindex=\"0\"><code>{\n        log {\n                output file /var/log/caddy/versun.log\n        }\n}\ndockge.example.com {\n        reverse_proxy localhost:5001\n}\nblog.example.com {\n        reverse_proxy localhost:8001\n}\n</code></pre><p>个人比较喜欢使用subdomain的形式，但每个subdomain都要在域名服务商那添加，你也可以使用子路径形式，更方便：</p>\n<pre tabindex=\"0\"><code>versun.me {\n        reverse_proxy /dockge/* localhost:5001\n        reverse_proxy /blog/* localhost:8001\n}\n</code></pre><p>修改完后，格式化下文件：<code>sudo caddy fmt /etc/caddy/Caddyfile --overwrite</code> <br>\n然后重载配置：<code>sudo systemctl reload caddy</code></p>\n<h2 id=\"配置cloudflare的dns记录\">配置Cloudflare的DNS记录</h2>\n<p>强烈建议使用Cloudflare来管理DNS记录，不仅有免费CDN，还有免费的代理防止服务器IP泄漏，还有防基础的DDOS。<br>\n添加A记录到你的服务器IP，并开启Proxy<br>\n然后在左侧面板，选择<code>SSL/TLS</code>，将加密模式设置为完全（Full）<br>\n过1分钟左右，通过域名应该就能访问到你的服务了。</p>\n<h2 id=\"安装应用\">安装应用</h2>\n<p>之后就是在Dockage上安装Docker应用，基本步骤如下：</p>\n<ol>\n<li>修改应用的docker compose内容中的port为只监听本地</li>\n<li>修改caddyfile配置文件，添加服务端口</li>\n<li>重启caddy</li>\n<li>配置DNS记录</li>\n</ol>\n<p>注意：如果有需要映射文件夹的，需要确保映射到当前路径：<code>./</code>，这样才能确保所有数据都在<code>/opt/stacks</code>里面。</p>\n<h2 id=\"定时备份docker数据\">定时备份docker数据</h2>\n<p>我使用<a href=\"https://www.backblaze.com/docs/cloud-storage-command-line-tools\">backblaze</a>的b2服务。</p>\n<ol>\n<li>\n<p>下载官方的<a href=\"https://github.com/Backblaze/B2_Command_Line_Tool/releases/latest/download/b2-linux\">b2程序</a></p>\n</li>\n<li>\n<p>执行命令：</p>\n<pre tabindex=\"0\"><code>chmod a+x b2-linux\nsudo mv b2-linux /usr/bin/b2\n</code></pre></li>\n<li>\n<p>在backblaze上<a href=\"https://secure.backblaze.com/b2_buckets.htm\">创建</a>私有存储桶和新的[应用密钥]\n(<a href=\"https://secure.backblaze.com/app_keys.htm\">https://secure.backblaze.com/app_keys.htm</a>)</p>\n</li>\n<li>\n<p>使用root完成认证: <code>sudo b2 authorize-account</code></p>\n</li>\n<li>\n<p>首次上传：<code>sudo b2 sync /opt/stacks/ b2://Your-Bucket-Name/</code></p>\n</li>\n<li>\n<p>创建cron定时任务：<code>sudo crontab -e</code></p>\n<pre tabindex=\"0\"><code># 每周一的3点上传一次，以本地版本为准，旧版本保留30天，\n0 3 * * 1 /usr/bin/b2 sync --keepDays 30 --replaceNewer --delete /opt/stacks/ b2://Your-Bucket-Name/  &gt;&gt; /var/log/b2sync.log 2&gt;&amp;1\n</code></pre></li>\n</ol>\n<p>完成</p>\n<h2 id=\"其它\">其它</h2>\n<p>你也可以安装一个Homepage，方便汇总所有的服务，挑一个吧：<a href=\"https://gethomepage.dev\">Homepage</a>, <a href=\"https://dashy.to/\">Dashy</a>, <a href=\"https://github.com/bastienwirtz/homer\">Homer</a>, <a href=\"https://homarr.dev/\">Homarr</a> <br>\n如果没有自带认证的，可以<a href=\"https://joshstrange.com/2020/01/13/securing-your-self-hosted-apps-with-single-signon/\">使用caddy来做认证</a></p>\n",
+				"content_text": "本篇文章记录了我的Home server从原先的 Debian + Yunohost 迁移到 Ubuntu + [Dockge](https://dockge.kuma.pet)的过程   \n迁移理由：   \n1. 为了装更多应用压榨VPS的8G内存   \n2. 使用docker方便调试和开发   \n3. Yunohost很多应用的更新没法及时跟上   \n4. Caddy在Debian下有很多小问题，Ubuntu就能一键启用，很奇怪   \n\n## 备份已有应用的数据  \n好在所有的应用都提供了导出数据功能，所以很快就完成了备份   \n\n## 初始化系统\n1. 将系统重装为Ubuntu 22.04后，升级重启。  \n2. 安装必需软件：`apt install vim sudo curl uidmap fail2ban -y`    \n3. 启用fail2ban：`systemctl enable fail2ban`   \n4. 创建非root用户：`adduser versun`   \n5. 将versun用户加入sudo：`visudo`\n6. 配置sshd：`vim /etc/ssh/sshd_config` 禁止root登陆和密码登陆\n```\nPasswordAuthentication no\nPermitRootLogin no\n```\n7. 重启sshd服务：`sudo systemctl restart sshd`   \n8. 给versun用户添加ssh public key  \n \n```\nsu versun\nmkdir ~/.ssh\necho \"Your ssh public key\" > ~/.ssh/authorized_keys\n\nsudo chmod 600 ~/.ssh/authorized_keys\n```\n9. 新建一个终端使用versun账户和密钥确保能登陆成功。\n\n## 安装Docker\n根据[官方文档](https://docs.docker.com/engine/install/ubuntu/)安装即可   \n将versun账户添加到 docker 组，以便以非root用户身份运行 Docker 命令：`sudo usermod -aG docker versun`  \n重启或者重新登陆versun账户\n\n## 安装Caddy\n同样，根据[官方文档](https://caddyserver.com/docs/install)安装即可   \n\n## 安装Dockge\n[官方安装步骤](https://github.com/louislam/dockge?tab=readme-ov-file#basic)如下：   \n\n```\n#Create directories that store your stacks and stores Dockge's stack\nmkdir -p /opt/stacks /opt/dockge\ncd /opt/dockge\n\n#Download the compose.yaml\ncurl https://raw.githubusercontent.com/louislam/dockge/master/compose.yaml --output compose.yaml\n```\n在下载完compose.yaml后，我们需要修改端口，将`- 5001:5001`改为`- 127.0.0.1:5001:5001`     \n因为我使用caddy来代理服务，所以就限制它只能通过本地访问，而不是暴露到外网。   \n然后启动服务：`docker compose up -d`   \n\n## 配置Caddyfile\n修改/etc/caddy/Caddyfile，内容参考如下   \n\n```\n{\n        log {\n                output file /var/log/caddy/versun.log\n        }\n}\ndockge.example.com {\n        reverse_proxy localhost:5001\n}\nblog.example.com {\n        reverse_proxy localhost:8001\n}\n```\n个人比较喜欢使用subdomain的形式，但每个subdomain都要在域名服务商那添加，你也可以使用子路径形式，更方便：\n\n```\nversun.me {\n        reverse_proxy /dockge/* localhost:5001\n        reverse_proxy /blog/* localhost:8001\n}\n```\n修改完后，格式化下文件：`sudo caddy fmt /etc/caddy/Caddyfile --overwrite`    \n然后重载配置：`sudo systemctl reload caddy`   \n\n## 配置Cloudflare的DNS记录\n强烈建议使用Cloudflare来管理DNS记录，不仅有免费CDN，还有免费的代理防止服务器IP泄漏，还有防基础的DDOS。   \n添加A记录到你的服务器IP，并开启Proxy   \n然后在左侧面板，选择`SSL/TLS`，将加密模式设置为完全（Full）  \n过1分钟左右，通过域名应该就能访问到你的服务了。\n\n## 安装应用\n之后就是在Dockage上安装Docker应用，基本步骤如下：\n1. 修改应用的docker compose内容中的port为只监听本地    \n2. 修改caddyfile配置文件，添加服务端口    \n3. 重启caddy    \n4. 配置DNS记录     \n   \n注意：如果有需要映射文件夹的，需要确保映射到当前路径：`./`，这样才能确保所有数据都在`/opt/stacks`里面。 \n\n## 定时备份docker数据\n我使用[backblaze](https://www.backblaze.com/docs/cloud-storage-command-line-tools)的b2服务。   \n1. 下载官方的[b2程序](https://github.com/Backblaze/B2_Command_Line_Tool/releases/latest/download/b2-linux)   \n2. 执行命令：   \n   \n   ```\n   chmod a+x b2-linux\n   sudo mv b2-linux /usr/bin/b2\n   ```\n4. 在backblaze上[创建](https://secure.backblaze.com/b2_buckets.htm)私有存储桶和新的[应用密钥]\n(https://secure.backblaze.com/app_keys.htm)   \n5. 使用root完成认证: `sudo b2 authorize-account`   \n6. 首次上传：`sudo b2 sync /opt/stacks/ b2://Your-Bucket-Name/`   \n7. 创建cron定时任务：`sudo crontab -e`   \n   \n   ```\n   # 每周一的3点上传一次，以本地版本为准，旧版本保留30天，\n   0 3 * * 1 /usr/bin/b2 sync --keepDays 30 --replaceNewer --delete /opt/stacks/ b2://Your-Bucket-Name/  >> /var/log/b2sync.log 2>&1\n   ```\n完成\n\n## 其它  \n你也可以安装一个Homepage，方便汇总所有的服务，挑一个吧：[Homepage](https://gethomepage.dev), [Dashy](https://dashy.to/), [Homer](https://github.com/bastienwirtz/homer), [Homarr](https://homarr.dev/)    \n如果没有自带认证的，可以[使用caddy来做认证](https://joshstrange.com/2020/01/13/securing-your-self-hosted-apps-with-single-signon/)   \n\n\n\n",
+				"date_published": "2024-04-27T07:50:34+08:00",
+				"url": "https://versun.me/2024/04/24/092845.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/26/commafeedminiflux.html",
+				
+				"content_html": "<p>CommaFeed的移动端界面比Miniflux好用很多</p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "CommaFeed的移动端界面比Miniflux好用很多\n\n<img src=\"uploads/2024/image.png\" width=\"277\" height=\"600\" alt=\"\">\n",
+				"date_published": "2024-04-26T18:03:25+08:00",
+				"url": "https://versun.me/2024/04/26/commafeedminiflux.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/26/100335.html",
+				
+				"content_html": "<p>我每周最勇敢的时刻：将“全部标为已读”</p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "我每周最勇敢的时刻：将“全部标为已读”\n\n<img src=\"uploads/2024/makeasread.png\" width=\"387\" height=\"312\" alt=\"\">\n",
+				"date_published": "2024-04-26T10:03:35+08:00",
+				"url": "https://versun.me/2024/04/26/100335.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/26/home-server-debian.html",
+				
+				"content_html": "<p>总算忙完工作了，我要开始重装我的 Home Server 了<br>\n从原先的 Debian + Yunohost 系统转为Ubuntu + Dockge<br>\n理由：</p>\n<ol>\n<li>为了装更多应用压榨VPS的8G内存</li>\n<li>使用docker方便调试</li>\n<li>Yunohost很多应用的更新没法及时跟上</li>\n<li>Caddy在Debian下有很多小问题，Ubuntu就能一键启用，很奇怪</li>\n</ol>\n",
+				"content_text": "总算忙完工作了，我要开始重装我的 Home Server 了   \r\n从原先的 Debian + Yunohost 系统转为Ubuntu + Dockge   \r\n理由：   \r\n1. 为了装更多应用压榨VPS的8G内存   \r\n2. 使用docker方便调试   \r\n3. Yunohost很多应用的更新没法及时跟上   \r\n4. Caddy在Debian下有很多小问题，Ubuntu就能一键启用，很奇怪\n",
+				"date_published": "2024-04-26T09:26:45+08:00",
+				"url": "https://versun.me/2024/04/26/home-server-debian.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/26/pegasusdjango-saas-htmxcssbulmatailwind.html",
+				
+				"content_html": "<p><a href=\"https://www.saaspegasus.com/\">Pegasus</a>的Django SaaS模板看起来很不错啊<br>\n前端用htmx，CSS框架可选bulma和tailwind，<br>\n还内置了登录系统和Stripe订阅，还有REST API，省了很多事情，就是稍微有点贵</p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "[Pegasus](https://www.saaspegasus.com/)的Django SaaS模板看起来很不错啊   \r\n前端用htmx，CSS框架可选bulma和tailwind，   \r\n还内置了登录系统和Stripe订阅，还有REST API，省了很多事情，就是稍微有点贵      \n\n<img src=\"https://versun.me/uploads/2024/price.png\" width=\"600\" height=\"261\" alt=\"\">\n",
+				"date_published": "2024-04-26T09:14:16+08:00",
+				"url": "https://versun.me/2024/04/26/pegasusdjango-saas-htmxcssbulmatailwind.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/26/cpuweb-nand.html",
+				
+				"content_html": "<p>好希望我也能写出这么个玩具来<br>\n一台图灵16位计算机，实现了CPU、汇编器、虚拟机翻译器和编译器的规范，同时将该平台移植到web上，并集成开发环境和用户界面<br>\n<a href=\"https://github.com/ArhanChaudhary/NAND\">NAND</a></p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "好希望我也能写出这么个玩具来   \r\n一台图灵16位计算机，实现了CPU、汇编器、虚拟机翻译器和编译器的规范，同时将该平台移植到web上，并集成开发环境和用户界面   \r\n[NAND](https://github.com/ArhanChaudhary/NAND)\r\n\n\n<img src=\"https://versun.me/uploads/2024/2024-04-26-08-24-29.png\" width=\"600\" height=\"305\" alt=\"\">\n",
+				"date_published": "2024-04-26T08:28:27+08:00",
+				"url": "https://versun.me/2024/04/26/cpuweb-nand.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/26/isp-start-your.html",
+				
+				"content_html": "<p>不要再折腾软路由了，试一试搭个ISP🤣   <br>\n<a href=\"https://startyourownisp.com/\">Start Your Own ISP</a></p>\n",
+				"content_text": "不要再折腾软路由了，试一试搭个ISP🤣      \r\n[Start Your Own ISP](https://startyourownisp.com/)\n",
+				"date_published": "2024-04-26T08:16:54+08:00",
+				"url": "https://versun.me/2024/04/26/isp-start-your.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/26/rss.html",
+				
+				"content_html": "<p>昨晚是不是发生了什么？<br>\n国内的RSS都挂了，刚刚手动更新后恢复了</p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "昨晚是不是发生了什么？   \r\n国内的RSS都挂了，刚刚手动更新后恢复了\n\n<img src=\"https://versun.me/uploads/2024/2024-04-2522-03-59.png\" width=\"475\" height=\"600\" alt=\"\">\n",
+				"date_published": "2024-04-26T06:04:53+08:00",
+				"url": "https://versun.me/2024/04/26/rss.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/25/pythonformat-country-pythonmystr.html",
+				
+				"content_html": "<p>原来python的format函数是必需给所有的占位符赋值的，不能只赋值其中一个。<br>\n比如下面的代码会报错，因为country没有赋值</p>\n<div class=\"highlight\"><pre tabindex=\"0\" style=\"color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4\"><code class=\"language-python\" data-lang=\"python\">my_str <span style=\"color:#f92672\">=</span> <span style=\"color:#e6db74\">&#34;My name is </span><span style=\"color:#e6db74\">{name}</span><span style=\"color:#e6db74\">, I&#39;m from </span><span style=\"color:#e6db74\">{country}</span><span style=\"color:#e6db74\">&#34;</span>     \nprint( my_str<span style=\"color:#f92672\">.</span>format(name<span style=\"color:#f92672\">=</span><span style=\"color:#e6db74\">&#39;Versun&#39;</span>) )     \n</code></pre></div><p>所以如果对于用户输入的字符串，比如用于AI的提示词，用replace更合适些。</p>\n",
+				"content_text": "原来python的format函数是必需给所有的占位符赋值的，不能只赋值其中一个。   \n比如下面的代码会报错，因为country没有赋值      \n\n```python   \nmy_str = \"My name is {name}, I'm from {country}\"     \nprint( my_str.format(name='Versun') )     \n```   \n所以如果对于用户输入的字符串，比如用于AI的提示词，用replace更合适些。  \n",
+				"date_published": "2024-04-25T21:05:59+08:00",
+				"url": "https://versun.me/2024/04/25/pythonformat-country-pythonmystr.html",
+				"tags": ["TIL"]
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/25/justin-dukestripebuttondown.html",
+				
+				"content_html": "<p>分享篇文章&lt;<a href=\"https://jmduke.com/posts/essays/two-years/\">做为独立开发者的这两年</a>&gt;，作者Justin Duke从Stripe公司离职后，创办了Buttondown，做为独立开发者，工作生活难平衡，虽灵活但更孤独，而且收入并没有比工作时的多。\n“但是，如果你认为它可能适合你，如果不是现在，那是什么时候？”</p>\n",
+				"content_text": "分享篇文章<[做为独立开发者的这两年](https://jmduke.com/posts/essays/two-years/)>，作者Justin Duke从Stripe公司离职后，创办了Buttondown，做为独立开发者，工作生活难平衡，虽灵活但更孤独，而且收入并没有比工作时的多。\r\n“但是，如果你认为它可能适合你，如果不是现在，那是什么时候？”\r\n",
+				"date_published": "2024-04-25T15:34:14+08:00",
+				"url": "https://versun.me/2024/04/25/justin-dukestripebuttondown.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/25/jsgorustpython.html",
+				
+				"content_html": "<p>朋友：“我现在学哪个编程语言能战未来？”\n我：“前端JS，后端Go，底层Rust”\n朋友：“那你学的是哪个？”\n我：“Python”</p>\n",
+				"content_text": "朋友：“我现在学哪个编程语言能战未来？”\r\n我：“前端JS，后端Go，底层Rust”\r\n朋友：“那你学的是哪个？”\r\n我：“Python”\n",
+				"date_published": "2024-04-25T15:33:36+08:00",
+				"url": "https://versun.me/2024/04/25/jsgorustpython.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/25/feed-feed-rss.html",
+				
+				"content_html": "<p>早上才发现我博客的feed链接有问题。。。。。<br>\n现在修复了<br>\nFeed: <a href=\"https://versun.me/feed\">rss</a>, <a href=\"https://versun.me/feed.json\">json</a></p>\n",
+				"content_text": "早上才发现我博客的feed链接有问题。。。。。   \r\n现在修复了   \r\nFeed: [rss](https://versun.me/feed), [json](https://versun.me/feed.json)\n",
+				"date_published": "2024-04-25T07:56:42+08:00",
+				"url": "https://versun.me/2024/04/25/feed-feed-rss.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/25/075015.html",
+				
+				"content_html": "<p>&ldquo;我可不能接受周末休息是为了有力气去上班&quot;😄</p>\n",
+				"content_text": "\"我可不能接受周末休息是为了有力气去上班\"😄\n",
+				"date_published": "2024-04-25T07:50:15+08:00",
+				"url": "https://versun.me/2024/04/25/075015.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/24/rss-ai-deeplgpt.html",
+				
+				"content_html": "<p>总算给 RSS翻译器 添加了 AI 摘要功能，可单独指定引擎，比如翻译使用DeepL，摘要使用GPT，完美配合。<br>\n还加了摘要细粒度控制，对长文更友好。<br>\n同时还优化了 AI 提示词的设置，现在可以给每个RSS源添加额外的提示词，方便针对性优化</p>\n",
+				"content_text": "总算给 RSS翻译器 添加了 AI 摘要功能，可单独指定引擎，比如翻译使用DeepL，摘要使用GPT，完美配合。  \n还加了摘要细粒度控制，对长文更友好。   \n同时还优化了 AI 提示词的设置，现在可以给每个RSS源添加额外的提示词，方便针对性优化\n",
+				"date_published": "2024-04-24T14:24:10+08:00",
+				"url": "https://versun.me/2024/04/24/rss-ai-deeplgpt.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/24/122325.html",
+				
+				"content_html": "<p>人变老的一个迹象就是喜欢看照片。<br>\n以前是拍了没时间看，现在是有时间就看</p>\n",
+				"content_text": "人变老的一个迹象就是喜欢看照片。   \n以前是拍了没时间看，现在是有时间就看\n",
+				"date_published": "2024-04-24T12:46:32+08:00",
+				"url": "https://versun.me/2024/04/24/122325.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/04/24/dwarkesh-patelpodcastmetallamaquesthorizon-meta.html",
+				
+				"content_html": "<p>看完 扎克伯格和Dwarkesh Patel访谈<a href=\"https://www.dwarkeshpatel.com/p/mark-zuckerberg\">podcast</a>，总算明白Meta为啥要开源Llama大模型和开放Quest的Horizon系统<br>\n虽然对Meta没好感，但还是佩服扎克伯格的战略眼光</p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "看完 扎克伯格和Dwarkesh Patel访谈[podcast](https://www.dwarkeshpatel.com/p/mark-zuckerberg)，总算明白Meta为啥要开源Llama大模型和开放Quest的Horizon系统   \r\n虽然对Meta没好感，但还是佩服扎克伯格的战略眼光   \r\n\n\n<img src=\"https://versun.me/uploads/2024/2024-04-24-11-31-24.png\" width=\"600\" height=\"251\" alt=\"\">\n",
+				"date_published": "2024-04-24T11:32:31+08:00",
+				"url": "https://versun.me/2024/04/24/dwarkesh-patelpodcastmetallamaquesthorizon-meta.html"
+			},
+			{
 				"id": "http://versun.micro.blog/2024/04/19/ai-chatdev.html",
 				
 				"content_html": "<p>发现一个很好玩的AI应用: ChatDev<br>\n可以模拟一家虚拟软件公司，定义不同角色的代理，比如产品, 程序员, 测试, 设计等 <br>\n然后你做为甲方给一个命题，让它们自己去讨论实现<br>\n这可不是玩具，人家是有正儿八经的论文做支撑的: 软件开发代理的经验协同学习框架 <br>\n<a href=\"https://github.com/OpenBMB/ChatDev\">项目</a>, <a href=\"https://arxiv.org/abs/2312.17025\">论文</a></p>\n<!-- raw HTML omitted -->\n",
-				"content_text": "发现一个很好玩的AI应用: ChatDev   \r\n可以模拟一家虚拟软件公司，定义不同角色的代理，比如产品, 程序员, 测试, 设计等    \r\n然后你做为甲方给一个命题，让它们自己去讨论实现   \r\n这可不是玩具，人家是有正儿八经的论文做支撑的: 软件开发代理的经验协同学习框架    \r\n[项目](https://github.com/OpenBMB/ChatDev), [论文](https://arxiv.org/abs/2312.17025)   \n\n<img src=\"uploads/2024/replay.gif\" width=\"600\" height=\"334\" alt=\"\">\n",
+				"content_text": "发现一个很好玩的AI应用: ChatDev   \r\n可以模拟一家虚拟软件公司，定义不同角色的代理，比如产品, 程序员, 测试, 设计等    \r\n然后你做为甲方给一个命题，让它们自己去讨论实现   \r\n这可不是玩具，人家是有正儿八经的论文做支撑的: 软件开发代理的经验协同学习框架    \r\n[项目](https://github.com/OpenBMB/ChatDev), [论文](https://arxiv.org/abs/2312.17025)   \n\n<img src=\"https://versun.me/uploads/2024/replay.gif\" width=\"600\" height=\"334\" alt=\"\">\n",
 				"date_published": "2024-04-19T15:37:41+08:00",
 				"url": "https://versun.me/2024/04/19/ai-chatdev.html"
 			},
@@ -18,7 +155,7 @@
 				"id": "http://versun.micro.blog/2024/04/19/til-python-requirementstxt.html",
 				
 				"content_html": "<p>TIL: 错误地在全局 Python 环境中安装了软件包？<br>\n使用空白 requirements.txt 运行 pip-sync ，可进行清理 <a href=\"https://x.com/_TylerHillery/status/1777707017328877676\">[via]</a></p>\n<!-- raw HTML omitted -->\n",
-				"content_text": "TIL: 错误地在全局 Python 环境中安装了软件包？   \r\n使用空白 requirements.txt 运行 pip-sync ，可进行清理 [[via]](https://x.com/_TylerHillery/status/1777707017328877676)\n\n<img src=\"uploads/2024/5e2f9560-49e0-481a-8fa7-c57642edbe69-1040x406.jpg\" width=\"600\" height=\"234\" alt=\"\">\n",
+				"content_text": "TIL: 错误地在全局 Python 环境中安装了软件包？   \r\n使用空白 requirements.txt 运行 pip-sync ，可进行清理 [[via]](https://x.com/_TylerHillery/status/1777707017328877676)\n\n<img src=\"https://versun.me/uploads/2024/5e2f9560-49e0-481a-8fa7-c57642edbe69-1040x406.jpg\" width=\"600\" height=\"234\" alt=\"\">\n",
 				"date_published": "2024-04-19T11:23:34+08:00",
 				"url": "https://versun.me/2024/04/19/til-python-requirementstxt.html"
 			},
@@ -34,7 +171,7 @@
 				"id": "http://versun.micro.blog/2024/04/18/til-httpszhwikipediaorgwikiebaeebbeacebafebb.html",
 				
 				"content_html": "<p>TIL: 才发现亚洲不仅有泛亚铁路，还有 泛亚公路！<br>\n从日本能开车到上海！！  (轮船到韩国)<br>\n<a href=\"https://zh.wikipedia.org/wiki/%E4%BA%9E%E6%B4%B2%E5%85%AC%E8%B7%AF%E7%B6%B2\">zh.wikipedia.org/wiki/%E4%&hellip;</a></p>\n<!-- raw HTML omitted -->\n",
-				"content_text": "TIL: 才发现亚洲不仅有泛亚铁路，还有 泛亚公路！  \n从日本能开车到上海！！  (轮船到韩国)   \n[zh.wikipedia.org/wiki/%E4%...](https://zh.wikipedia.org/wiki/%E4%BA%9E%E6%B4%B2%E5%85%AC%E8%B7%AF%E7%B6%B2)  \n\n\n<img src=\"uploads/2024/asian-highways.png\" width=\"453\" height=\"600\" alt=\"\">\n",
+				"content_text": "TIL: 才发现亚洲不仅有泛亚铁路，还有 泛亚公路！  \n从日本能开车到上海！！  (轮船到韩国)   \n[zh.wikipedia.org/wiki/%E4%...](https://zh.wikipedia.org/wiki/%E4%BA%9E%E6%B4%B2%E5%85%AC%E8%B7%AF%E7%B6%B2)  \n\n\n<img src=\"https://versun.me/uploads/2024/asian-highways.png\" width=\"453\" height=\"600\" alt=\"\">\n",
 				"date_published": "2024-04-18T14:18:42+08:00",
 				"url": "https://versun.me/2024/04/18/til-httpszhwikipediaorgwikiebaeebbeacebafebb.html",
 				"tags": ["TIL"]
