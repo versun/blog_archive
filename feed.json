@@ -7,6 +7,30 @@
 	"items": [
 		
 			{
+				"id": "http://versun.micro.blog/2024/05/10/deepseek-xjpkey-findings.html",
+				
+				"content_html": "<p>DeepSeek虽然便宜，但内容审核也太严格了吧，基本不可用啊。<br>\n你过滤个XJP我能理解，但为啥“Key Findings”、“ Welcome to the 52nd!”也过滤??<br>\n后台还调不了过滤等级。。。。</p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "DeepSeek虽然便宜，但内容审核也太严格了吧，基本不可用啊。   \r\n你过滤个XJP我能理解，但为啥“Key Findings”、“ Welcome to the 52nd!”也过滤??   \r\n后台还调不了过滤等级。。。。   \r\n\n\n<img src=\"uploads/2024/2024-05-10-08-49-44.png\" width=\"600\" height=\"303\" alt=\"\">\n",
+				"date_published": "2024-05-10T08:52:00+08:00",
+				"url": "https://versun.me/2024/05/10/deepseek-xjpkey-findings.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/05/08/jetbrains-idesshdockergatewayideide-ide.html",
+				
+				"content_html": "<p>JetBrains IDE的远程开发功能也太弱鸡了吧，无论是SSH还是Docker还是单独的Gateway，都需要在远端安装IDE后台，然后在本地安装IDE前端。。。<br>\n本地已经安装好的IDE完成没用，就是一个远程启动器。。。。</p>\n",
+				"content_text": "JetBrains IDE的远程开发功能也太弱鸡了吧，无论是SSH还是Docker还是单独的Gateway，都需要在远端安装IDE后台，然后在本地安装IDE前端。。。   \r\n本地已经安装好的IDE完成没用，就是一个远程启动器。。。。\n",
+				"date_published": "2024-05-08T20:48:21+08:00",
+				"url": "https://versun.me/2024/05/08/jetbrains-idesshdockergatewayideide-ide.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/05/05/183622.html",
+				
+				"content_html": "<p>迷茫时读书，忙碌时运动，独处时思考</p>\n",
+				"content_text": "迷茫时读书，忙碌时运动，独处时思考\n",
+				"date_published": "2024-05-05T18:36:22+08:00",
+				"url": "https://versun.me/2024/05/05/183622.html"
+			},
+			{
 				"id": "http://versun.micro.blog/2024/05/04/223159.html",
 				
 				"content_html": "<p>刚看完电影&lt;铃芽之旅&gt;，故事讲得很好，点到为止，不煽情不做作，很好看。\n真羡慕这种想象力和叙事技巧</p>\n",
