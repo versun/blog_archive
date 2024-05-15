@@ -25,7 +25,130 @@
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/10/deepseek-xjpkey-findings.html" class="u-url"><time class="dt-published" datetime="2024-05-10 08:52:00 &#43;0800">May 10, 2024</time></a>
+		<a href="https://versun.me/2024/05/15/perplexitygptosonnetopus.html" class="u-url"><time class="dt-published" datetime="2024-05-15 09:46:40 &#43;0800">May 15, 2024</time></a>
+
+		<div class="e-content">
+			 <p>已将Perplexity的默认模型改为GPT-4o，即刻拥有Sonnet的简洁和快速，又有Opus的智商，非常完美</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://versun.me/2024/05/14/python-pycache.html">关于Python的 __pycache__ 文件夹小记</a></h1>
+		
+
+		<a href="https://versun.me/2024/05/14/python-pycache.html" class="u-url"><time class="dt-published" datetime="2024-05-14 16:19:21 &#43;0800">May 14, 2024</time></a>
+
+		<div class="e-content">
+			 <p>ref: <a href="https://realpython.com/python-pycache/#what-actions-invalidate-the-cache">https://realpython.com/python-pycache/#what-actions-invalidate-the-cache</a></p>
+<ul>
+<li>Python 中的 <code>__pycache__</code> 文件夹是什么？<br>
+Python模块的缓存文件夹，将需要的模块编译为字节码，并缓存(.pyc)到该文件夹中，实现更快的导入速度。<br>
+除了<code>__pycache__</code> 文件夹，Python还在内存中创建了模块缓存，缓存需要导入多次的模块，减少导入模块的开销。</li>
+<li>如何判断缓存的模块是否过期？<br>
+默认基于时间戳判断，也可以基于哈希值</li>
+<li>即使使用了 from &hellip; import 语法，Python 还是会读取并编译整个模块，包括未使用的。</li>
+<li>可以在python命令后使用-X importtime参数来显示每个模块的导入时间</li>
+<li>递归删除所有 <code>__pycache__</code> 文件夹(linux)：<code>find . -type d -name __pycache__ -exec rm -rf {} +</code></li>
+<li>如何禁止Python创建缓存文件？<br>
+向 python 命令传递 -B 选项，或者设置环境变量<code>PYTHONDONTWRITEBYTECODE=1</code></li>
+<li>集中存储缓存<br>
+方法1：<code>python -X pycache_prefix=/tmp/pycache calculator.py</code> <br>
+方法2：设置环境变量<code>PYTHONPYCACHEPREFIX=/tmp/pycache</code><br>
+它会在指定的文件夹下镜像项目的目录结构，由于这种集中式缓存的层次结构与项目结构相匹配，因此可以在多个项目之间共享该缓存文件夹</li>
+</ul>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/13/home-serverstatus-page.html" class="u-url"><time class="dt-published" datetime="2024-05-13 19:49:32 &#43;0800">May 13, 2024</time></a>
+
+		<div class="e-content">
+			 <p>给我的Home Server加了<a href="https://status.versun.me">Status Page</a></p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/11/rss-webfeedbincommafeedminiflux-reeder.html" class="u-url"><time class="dt-published" datetime="2024-05-11 20:39:04 &#43;0800">May 11, 2024</time></a>
+
+		<div class="e-content">
+			 <p>我使用了几乎所有的RSS阅读器，目前体验最好的：<br>
+Web端：Feedbin(三栏式)，CommaFeed(展开式)，Miniflux(单栏式)<br>
+客户端：Reeder   <br>
+目前最期待的：<a href="https://twitter.com/DIYgod">DIYgod</a>正在开发的ReadOK/Follow</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/11/app.html" class="u-url"><time class="dt-published" datetime="2024-05-11 19:13:03 &#43;0800">May 11, 2024</time></a>
+
+		<div class="e-content">
+			 <p>自从打开国内所有app的&lt;长辈模式&gt;后，屏幕时间骤降到2小时半每天！！
+目前还有戒断反应，会时不时拿出来划拉几下，所以应该还能再降一半，争取控制在每天1小时左右！</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/10/manas-j-saloi.html" class="u-url"><time class="dt-published" datetime="2024-05-10 18:42:21 &#43;0800">May 10, 2024</time></a>
+
+		<div class="e-content">
+			 <p>发现一个很不错的博客：<a href="https://manassaloi.com/">Manas J. Saloi</a> <br>
+喜欢它的博客内容安排：<br>
+Blog：记录未经过滤的想法<br>
+Bookshelf：记录看过的书<br>
+Summaries：记录读书笔记文摘<br>
+Links：记录常用的和个人相关的链接<br>
+POW：工作经历<br>
+Uses This：使用的工具、服务、技术等</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/10/httpscqco.html" class="u-url"><time class="dt-published" datetime="2024-05-10 08:22:30 &#43;0000">May 10, 2024</time></a>
+
+		<div class="e-content">
+			 <p>这个工具非常适合进行 多人深度/复杂 的 文字讨论/评论<br>
+<a href="https://cq2.co/">cq2.co</a></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/10/aitldr.html" class="u-url"><time class="dt-published" datetime="2024-05-10 01:43:14 &#43;0000">May 10, 2024</time></a>
+
+		<div class="e-content">
+			 <p>AI摘要/TL;DR 会不会就是文字版的 短视频？</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/10/deepseek-xjpkey-findings.html" class="u-url"><time class="dt-published" datetime="2024-05-10 00:52:00 &#43;0000">May 10, 2024</time></a>
 
 		<div class="e-content">
 			 <p>DeepSeek虽然便宜，但内容审核也太严格了吧，基本不可用啊。<br>
@@ -62,7 +185,7 @@
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/04/223159.html" class="u-url"><time class="dt-published" datetime="2024-05-04 22:31:59 &#43;0800">May 4, 2024</time></a>
+		<a href="https://versun.me/2024/05/04/223159.html" class="u-url"><time class="dt-published" datetime="2024-05-04 14:31:59 &#43;0000">May 4, 2024</time></a>
 
 		<div class="e-content">
 			 <p>刚看完电影&lt;铃芽之旅&gt;，故事讲得很好，点到为止，不煽情不做作，很好看。
@@ -74,7 +197,7 @@
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/04/realpython.html" class="u-url"><time class="dt-published" datetime="2024-05-04 16:31:42 &#43;0800">May 4, 2024</time></a>
+		<a href="https://versun.me/2024/05/04/realpython.html" class="u-url"><time class="dt-published" datetime="2024-05-04 08:31:42 &#43;0000">May 4, 2024</time></a>
 
 		<div class="e-content">
 			 <p>realpython的内容是真不错，但一个月300多的价格下不了手啊……</p>
@@ -85,7 +208,7 @@
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/03/neato.html" class="u-url"><time class="dt-published" datetime="2024-05-03 06:57:28 &#43;0800">May 3, 2024</time></a>
+		<a href="https://versun.me/2024/05/03/neato.html" class="u-url"><time class="dt-published" datetime="2024-05-02 22:57:28 &#43;0000">May 2, 2024</time></a>
 
 		<div class="e-content">
 			 <p>期待<a href="https://neato.pub">Neato</a></p>
@@ -96,7 +219,7 @@
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/02/195616.html" class="u-url"><time class="dt-published" datetime="2024-05-02 19:56:16 &#43;0800">May 2, 2024</time></a>
+		<a href="https://versun.me/2024/05/02/195616.html" class="u-url"><time class="dt-published" datetime="2024-05-02 11:56:16 &#43;0000">May 2, 2024</time></a>
 
 		<div class="e-content">
 			 <p>每次在看大自然纪录片，比如&lt;地球&gt;时，恨不得游遍整个地球！<br>
@@ -145,7 +268,7 @@
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/04/29/roadmaps-ai.html" class="u-url"><time class="dt-published" datetime="2024-04-29 16:53:40 &#43;0800">Apr 29, 2024</time></a>
+		<a href="https://versun.me/2024/04/29/roadmaps-ai.html" class="u-url"><time class="dt-published" datetime="2024-04-29 08:53:40 &#43;0000">Apr 29, 2024</time></a>
 
 		<div class="e-content">
 			 <p>刚发现，专门做开发人员学习路线图的<a href="https://roadmap.sh/">Roadmaps</a>，添加了好多内容，<br>
@@ -271,7 +394,7 @@ sudo mv b2-linux /usr/bin/b2
 <li>
 <p>创建cron定时任务：<code>sudo crontab -e</code></p>
 <pre tabindex="0"><code># 每周一的3点上传一次，以本地版本为准，旧版本保留30天，
-0 3 * * 1 /usr/bin/b2 sync --keepDays 30 --replaceNewer --delete /opt/stacks/ b2://Your-Bucket-Name/  &gt;&gt; /var/log/b2sync.log 2&gt;&amp;1
+0 3 * * 1 /usr/bin/b2 sync --keep-days 30 --replace-newer /opt/stacks/ b2://Your-Bucket-Name/  &gt;&gt; /var/log/b2sync.log 2&gt;&amp;1
 </code></pre></li>
 </ol>
 <p>完成</p>
@@ -328,7 +451,7 @@ sudo mv b2-linux /usr/bin/b2
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/04/26/pegasusdjango-saas-htmxcssbulmatailwind.html" class="u-url"><time class="dt-published" datetime="2024-04-26 09:14:16 &#43;0800">Apr 26, 2024</time></a>
+		<a href="https://versun.me/2024/04/26/pegasusdjango-saas-htmxcssbulmatailwind.html" class="u-url"><time class="dt-published" datetime="2024-04-26 01:14:16 &#43;0000">Apr 26, 2024</time></a>
 
 		<div class="e-content">
 			 <p><a href="https://www.saaspegasus.com/">Pegasus</a>的Django SaaS模板看起来很不错啊<br>
@@ -396,7 +519,7 @@ print( my_str<span style="color:#f92672">.</span>format(name<span style="color:#
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/04/25/justin-dukestripebuttondown.html" class="u-url"><time class="dt-published" datetime="2024-04-25 15:34:14 &#43;0800">Apr 25, 2024</time></a>
+		<a href="https://versun.me/2024/04/25/justin-dukestripebuttondown.html" class="u-url"><time class="dt-published" datetime="2024-04-25 07:34:14 &#43;0000">Apr 25, 2024</time></a>
 
 		<div class="e-content">
 			 <p>分享篇文章&lt;<a href="https://jmduke.com/posts/essays/two-years/">做为独立开发者的这两年</a>&gt;，作者Justin Duke从Stripe公司离职后，创办了Buttondown，做为独立开发者，工作生活难平衡，虽灵活但更孤独，而且收入并没有比工作时的多。
@@ -484,7 +607,7 @@ Feed: <a href="https://versun.me/feed">rss</a>, <a href="https://versun.me/feed.
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/04/19/ai-chatdev.html" class="u-url"><time class="dt-published" datetime="2024-04-19 15:37:41 &#43;0800">Apr 19, 2024</time></a>
+		<a href="https://versun.me/2024/04/19/ai-chatdev.html" class="u-url"><time class="dt-published" datetime="2024-04-19 07:37:41 &#43;0000">Apr 19, 2024</time></a>
 
 		<div class="e-content">
 			 <p>发现一个很好玩的AI应用: ChatDev<br>
