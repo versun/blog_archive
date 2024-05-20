@@ -25,7 +25,1113 @@
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/15/perplexitygptosonnetopus.html" class="u-url"><time class="dt-published" datetime="2024-05-15 09:46:40 &#43;0800">May 15, 2024</time></a>
+		<a href="https://versun.me/2024/05/20/081334.html" class="u-url"><time class="dt-published" datetime="2024-05-20 08:13:34 &#43;0800">May 20, 2024</time></a>
+
+		<div class="e-content">
+			 <p>刚看完《A.I.创世者 / The Creator》，比预想中的要好看，那小孩（Alphie / Madeleine Yuna Voyles）的演技炸裂，特别是最后一幕，深刻演示了“喜极而泣&quot;。<br>
+准备去看看1个小时的幕后花絮《True Love: Making &lsquo;The Creator&rsquo;》</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://versun.me/2024/05/19/llm.html">主流LLM模型翻译测试</a></h1>
+		
+
+		<a href="https://versun.me/2024/05/19/llm.html" class="u-url"><time class="dt-published" datetime="2024-05-19 16:56:41 &#43;0800">May 19, 2024</time></a>
+
+		<div class="e-content">
+			 <p>目的：为了给<a href="https://rsstranslator.com">RSS翻译器</a>选一个可替代gpt-3.5-turbo的便宜模型做为主力翻译引擎。</p>
+<p>判定规则：能翻译出下方3句话，质量能看懂即可，且仅输出翻译结果</p>
+<p>提示词：</p>
+<pre tabindex="0"><code>System Message: Translate only the text into Chinese, return only the translations, do not explain the original text.   
+User Messages:   
+Don't ask if a monorepo is good for you – ask if you're good enough for a monorepo    
+Want more ways to post? for iOS, macOS, Android, and the web.   
+Does Offering ChatGPT a Tip Cause it to Generate Better Text? An Analysis  
+
+</code></pre><p>参数：</p>
+<pre tabindex="0"><code>temperature=0.2,   
+top_p=0.2,   
+max_tokens = 1000     
+</code></pre><p>注意：
+测试均使用API进行，非playground环境。<br>
+仅供本人参考使用，非常不严谨，勿喷，谢谢。<br>
+不定时更新</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>结果</th>
+<th>日期</th>
+<th>平台</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>openrouter/auto</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-capybara-7b:free</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mistral-7b-instruct:free</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openchat/openchat-7b:free</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>gryphe/mythomist-7b:free</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>undi95/toppy-m-7b:free</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openrouter/cinematika-7b:free</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/gemma-7b-it:free</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-3-8b-instruct:free</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>koboldai/psyfighter-13b-2</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>intel/neural-chat-7b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>pygmalionai/mythalion-13b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>xwin-lm/xwin-lm-70b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>alpindale/goliath-120b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>neversleep/noromaid-20b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>gryphe/mythomist-7b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>sophosympatheia/midnight-rose-70b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>sao10k/fimbulvetr-11b-v2</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>neversleep/llama-3-lumimaid-8b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>undi95/remm-slerp-l2-13b:extended</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>gryphe/mythomax-l2-13b:extended</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-3-8b-instruct:extended</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>neversleep/llama-3-lumimaid-8b:extended</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mancer/weaver</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-capybara-7b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/codellama-34b-instruct</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>codellama/codellama-70b-instruct</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>phind/phind-codellama-34b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>open-orca/mistral-7b-openorca</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>teknium/openhermes-2-mistral-7b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>undi95/remm-slerp-l2-13b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openrouter/cinematika-7b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>01-ai/yi-34b-chat</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>01-ai/yi-34b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>01-ai/yi-6b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>togethercomputer/stripedhyena-nous-7b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>togethercomputer/stripedhyena-hessian-7b</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mixtral-8x7b</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-hermes-yi-34b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-hermes-2-mixtral-8x7b-sft</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-hermes-2-mistral-7b-dpo</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-3-8b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-3-70b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-guard-2-8b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>databricks/dbrx-instruct</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>allenai/olmo-7b-instruct</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>snowflake/snowflake-arctic-instruct</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>qwen/qwen-110b-chat</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>qwen/qwen-32b-chat</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>qwen/qwen-14b-chat</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>qwen/qwen-7b-chat</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>qwen/qwen-4b-chat</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mixtral-8x7b-instruct:nitro</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-3.5-turbo</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-3.5-turbo-0125</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-3.5-turbo-1106</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-3.5-turbo-0613</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-3.5-turbo-0301</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-3.5-turbo-16k</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4o</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4o-2024-05-13</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4-turbo</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4-turbo-preview</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4-1106-preview</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4-0314</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4-32k</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4-32k-0314</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-4-vision-preview</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openai/gpt-3.5-turbo-instruct</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/palm-2-chat-bison</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/palm-2-codechat-bison</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/palm-2-chat-bison-32k</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/palm-2-codechat-bison-32k</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/gemini-pro</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/gemini-pro-vision</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/gemini-pro-1.5</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/gemini-flash-1.5</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>perplexity/llama-3-sonar-small-32k-chat</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>perplexity/llama-3-sonar-small-32k-online</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>perplexity/llama-3-sonar-large-32k-chat</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>perplexity/llama-3-sonar-large-32k-online</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>fireworks/firellava-13b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-3-opus</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-3-sonnet</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-3-haiku</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-2</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-2.0</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-2.1</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-instant-1</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-3-opus:beta</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-3-sonnet:beta</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-3-haiku:beta</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-2:beta</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-2.0:beta</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-2.1:beta</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-instant-1:beta</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-2-13b-chat</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-2-70b-chat</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-hermes-llama2-13b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-capybara-34b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>jondurbin/airoboros-l2-70b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>jondurbin/bagel-34b</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>austism/chronos-hermes-13b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mistral-7b-instruct</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>teknium/openhermes-2.5-mistral-7b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>gryphe/mythomax-l2-13b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>huggingfaceh4/zephyr-7b-beta</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>openchat/openchat-7b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>undi95/toppy-m-7b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>lizpreciatior/lzlv-70b-fp16-hf</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>jebcarter/psyfighter-13b</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mixtral-8x7b-instruct</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>neversleep/noromaid-mixtral-8x7b-instruct</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-hermes-2-mixtral-8x7b-dpo</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>rwkv/rwkv-5-world-3b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>recursal/rwkv-5-3b-ai-town</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>recursal/eagle-7b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/gemma-7b-it</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-3-8b-instruct</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-3-70b-instruct</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>microsoft/wizardlm-2-8x22b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>microsoft/wizardlm-2-7b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mixtral-8x22b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mixtral-8x22b-instruct</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>lynn/soliloquy-l3</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>neversleep/llama-3-lumimaid-70b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>cognitivecomputations/dolphin-mixtral-8x7b</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>liuhaotian/llava-yi-34b</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>qwen/qwen-72b-chat</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>deepseek/deepseek-chat</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>deepseek/deepseek-coder</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-1</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-1.2</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-instant-1.0</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>anthropic/claude-instant-1.1</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>huggingfaceh4/zephyr-7b-beta:free</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-2-70b-chat:nitro</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>gryphe/mythomax-l2-13b:nitro</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mistral-7b-instruct:nitro</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>google/gemma-7b-it:nitro</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>undi95/toppy-m-7b:nitro</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-3-8b-instruct:nitro</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>meta-llama/llama-3-70b-instruct:nitro</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>liuhaotian/llava-13b</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>nousresearch/nous-hermes-2-vision-7b</td>
+<td>🐛</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mistral-tiny</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mistral-small</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mistral-medium</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>mistralai/mistral-large</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>cohere/command</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>cohere/command-r</td>
+<td>❌</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+<tr>
+<td>cohere/command-r-plus</td>
+<td>✅</td>
+<td>2024-5-19</td>
+<td>openrouter</td>
+</tr>
+</tbody>
+</table>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://versun.me/2024/05/18/092416.html">Django数据迁移历险记</a></h1>
+		
+
+		<a href="https://versun.me/2024/05/18/092416.html" class="u-url"><time class="dt-published" datetime="2024-05-18 18:22:32 &#43;0800">May 18, 2024</time></a>
+
+		<div class="e-content">
+			 <p>⚠️不到万不得已，不建议手写migration文件，大佬除外。</p>
+<h2 id="事情的起因">事情的起因：</h2>
+<p>在RSS翻译器的缓存模型中，有一个做为hash的主键，当初脑抽使用了BinaryField类型，导致数据库的检索速度一直不理想。
+所以这次准备换成检索速度最快的Integer类型。
+正如所料，事情没那么简单，这事得从hash的计算方式说起。</p>
+<h2 id="过程">过程：</h2>
+<p>为了能在低配置的机器上尽可能快的运行，我使用了谷歌开发的CityHash64来计算hash，理由很简单，它的代码逻辑比SHA的要简单的多，对于长文的计算要快的多，又能保证唯一性，所以非常理想。</p>
+<p>接着在将<code>BinaryField</code>改为<code>BigIntegerField</code>，并在migrate后，测试存储数据时，程序报错了：<code>OverflowError: Python int too large to convert to SQLite INTEGER</code>，一番GPT后才知道，SQLite只能存储64位的有符号整数，而CityHash64的值是无符号64位，超出了范围。</p>
+<p>于是，为了方便后期维护和扩展，决定使用char类型来存储值，虽然比Integer的检索慢，但至少比Binary快呀。<br>
+既然使用了char类型，就没有大小限制，果断升级到CityHash128来计算hash，并限制39个字符数，相关代码<a href="https://github.com/rss-translator/RSS-Translator/blob/main/translator/models/base.py#L46">在此</a></p>
+<p><strong>接下来就是重头戏：数据迁移</strong> <br>
+首先需要重新计算所有的hash值，所以简单的类型migrate只是做了第一步，还需要在migration文件中手动更新数据。<br>
+于是我更改了migration文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> migrations, models
+<span style="color:#f92672">import</span> cityhash
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_hash</span>(apps, schema_editor):
+    MyModel <span style="color:#f92672">=</span> apps<span style="color:#f92672">.</span>get_model(<span style="color:#e6db74">&#39;translator&#39;</span>, <span style="color:#e6db74">&#39;translated_content&#39;</span>)
+    <span style="color:#66d9ef">for</span> obj <span style="color:#f92672">in</span> MyModel<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all():
+        obj<span style="color:#f92672">.</span>hash <span style="color:#f92672">=</span> cityhash<span style="color:#f92672">.</span>CityHash128(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>obj<span style="color:#f92672">.</span>original_content<span style="color:#e6db74">}{</span>obj<span style="color:#f92672">.</span>translated_language<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+        obj<span style="color:#f92672">.</span>save()
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Migration</span>(migrations<span style="color:#f92672">.</span>Migration):
+    dependencies <span style="color:#f92672">=</span> [
+        (<span style="color:#e6db74">&#39;translator&#39;</span>, <span style="color:#e6db74">&#39;0030_alter_azureaitranslator_content_translate_prompt_and_more&#39;</span>),
+    ]
+
+    operations <span style="color:#f92672">=</span> [
+        migrations<span style="color:#f92672">.</span>AlterField(
+            model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;translated_content&#39;</span>,
+            name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;hash&#39;</span>,
+            field<span style="color:#f92672">=</span>models<span style="color:#f92672">.</span>CharField(editable<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">39</span>, primary_key<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, serialize<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>),
+        ),
+        migrations<span style="color:#f92672">.</span>RunPython(update_hash),
+    ]
+</code></pre></div><p>加了<code>update_hash</code>函数和RunPython，不要问为啥不用<code>bulk_update</code>，因为它无法用于主键类型字段的更新。<br>
+接着migrate没有报错，添加数据也正常，在我以为大功告成时，我检查了表里的数据，果然我还是太乐观了，表里原有的数据没有被更新，而是重新创建了新的一条数据。</p>
+<p>又是一番GPT，了解到Django为了安全，任何migrate都不能修改原有的数据，但我不死心，改了update_hash函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_hash</span>(apps, schema_editor):
+    MyModel <span style="color:#f92672">=</span> apps<span style="color:#f92672">.</span>get_model(<span style="color:#e6db74">&#39;translator&#39;</span>, <span style="color:#e6db74">&#39;translated_content&#39;</span>)
+    <span style="color:#66d9ef">for</span> obj <span style="color:#f92672">in</span> MyModel<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all():
+        new_hash <span style="color:#f92672">=</span> cityhash<span style="color:#f92672">.</span>CityHash128(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>obj<span style="color:#f92672">.</span>original_content<span style="color:#e6db74">}{</span>obj<span style="color:#f92672">.</span>translated_language<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+        MyModel<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>filter(hash<span style="color:#f92672">=</span>obj<span style="color:#f92672">.</span>hash)<span style="color:#f92672">.</span>update(hash<span style="color:#f92672">=</span>new_hash)
+</code></pre></div><p>这次没有意外，依旧无法修改，filter无法正常筛选出数据，一直为空。</p>
+<p>只能另辟蹊径，创建多个migration来完成这次的迁移：</p>
+<ol>
+<li>保留原有的hash字段(BinaryField)，创建新字段<code>hash_new</code>(CharField)。（<a href="https://github.com/rss-translator/RSS-Translator/blob/main/translator/migrations/0031_translated_content_new_hash.py">代码</a>）</li>
+<li>计算<code>hash_new</code>值。（<a href="https://github.com/rss-translator/RSS-Translator/blob/main/translator/migrations/0032_update_current_hash_value.py">代码</a>）</li>
+<li>删除hash字段，并设置<code>hash_new</code>为主键。（<a href="https://github.com/rss-translator/RSS-Translator/blob/main/translator/migrations/0033_remove_translated_content_hash_and_more.py">代码</a>）</li>
+<li>重命名<code>hash_new</code>为hash。（<a href="https://github.com/rss-translator/RSS-Translator/blob/main/translator/migrations/0034_rename_new_hash_translated_content_hash.py">代码</a>）<br>
+同时，为了数据安全，写了一个<a href="https://github.com/rss-translator/RSS-Translator/blob/main/translator/migrations/__init__.py"><code>backup_db</code></a>函数，在执行迁移前，拷贝一份sqlite数据库做<a href="https://github.com/rss-translator/RSS-Translator/blob/main/translator/migrations/0031_translated_content_new_hash.py#L18">备份</a>。</li>
+</ol>
+<p>好了，万事俱备，只欠东风。<br>
+本地运行测试，一切正常。<br>
+服务器dev环境运行测试，一切正常。<br>
+demo环境运行测试，一切正常。<br>
+个人使用的生产环境运行测试，一切正常。</p>
+<p>在我以为肯定还有什么问题的时候，它运行正常了。。。。 <br>
+我怀着忐忑不安的心，将新的docker镜像push了。。。。</p>
+<p>接下来就是等待迎接新的Bug了。</p>
+<p>PS：我相信我的方案肯定不是最完美的，如果你有更好的方案，欢迎留言联系我哈，感激不尽！</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/18/djangomigration.html" class="u-url"><time class="dt-published" datetime="2024-05-18 16:46:58 &#43;0800">May 18, 2024</time></a>
+
+		<div class="e-content">
+			 <p>纪念，今天是我第一次徒手写Django的migration文件！</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/17/ai.html" class="u-url"><time class="dt-published" datetime="2024-05-17 20:33:30 &#43;0800">May 17, 2024</time></a>
+
+		<div class="e-content">
+			 <p>之前推特在严格模式下是可以开的，现在不行了，估计需要更多数据来训练AI。。。<br>
+至于图2中所说的像往常一样保持一致，有种此地无银三百两的感觉。。。。</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/17/ldapjs.html" class="u-url"><time class="dt-published" datetime="2024-05-17 14:58:57 &#43;0800">May 17, 2024</time></a>
+
+		<div class="e-content">
+			 <p>看到<a href="https://github.com/ldapjs/node-ldapjs">LDAPjs</a>的维护者因为一封恶意邮件而归档了项目，深感惋惜，开源环境正在变的越来越差，我们该做些什么呢？ <br>
+还有一篇&lt;<a href="https://www.hezmatt.org/~mpalmer/blog/2024/05/14/is-this-project-still-maintained.html">这个项目还在维护吗？</a>&gt;</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/17/netbsd.html" class="u-url"><time class="dt-published" datetime="2024-05-17 14:12:23 &#43;0800">May 17, 2024</time></a>
+
+		<div class="e-content">
+			 <p>很喜欢<a href="https://www.netbsd.org/">NetBSD</a>的主页设计和颜色搭配</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/16/153518.html" class="u-url"><time class="dt-published" datetime="2024-05-16 07:35:18 &#43;0000">May 16, 2024</time></a>
+
+		<div class="e-content">
+			 <p>在我Debug了2天后，才发现Django的<code>ModelAdmin</code>模块中， <code>list_filter</code>也会调用<code>get_search_results</code>函数来查询数据库   <br>
+因此如果你设置了<code>list_filter</code>列表，但在admin页面上并没有成功筛选<br>
+可能是你自定义了<code>get_search_results</code>函数，对筛选结果进行了额外的操作。</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+
+		<a href="https://versun.me/2024/05/15/perplexitygptosonnetopus.html" class="u-url"><time class="dt-published" datetime="2024-05-15 01:46:40 &#43;0000">May 15, 2024</time></a>
 
 		<div class="e-content">
 			 <p>已将Perplexity的默认模型改为GPT-4o，即刻拥有Sonnet的简洁和快速，又有Opus的智商，非常完美</p>
@@ -123,7 +1229,7 @@ Uses This：使用的工具、服务、技术等</p>
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/10/httpscqco.html" class="u-url"><time class="dt-published" datetime="2024-05-10 08:22:30 &#43;0000">May 10, 2024</time></a>
+		<a href="https://versun.me/2024/05/10/httpscqco.html" class="u-url"><time class="dt-published" datetime="2024-05-10 16:22:30 &#43;0800">May 10, 2024</time></a>
 
 		<div class="e-content">
 			 <p>这个工具非常适合进行 多人深度/复杂 的 文字讨论/评论<br>
@@ -136,7 +1242,7 @@ Uses This：使用的工具、服务、技术等</p>
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/10/aitldr.html" class="u-url"><time class="dt-published" datetime="2024-05-10 01:43:14 &#43;0000">May 10, 2024</time></a>
+		<a href="https://versun.me/2024/05/10/aitldr.html" class="u-url"><time class="dt-published" datetime="2024-05-10 09:43:14 &#43;0800">May 10, 2024</time></a>
 
 		<div class="e-content">
 			 <p>AI摘要/TL;DR 会不会就是文字版的 短视频？</p>
@@ -148,7 +1254,7 @@ Uses This：使用的工具、服务、技术等</p>
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/10/deepseek-xjpkey-findings.html" class="u-url"><time class="dt-published" datetime="2024-05-10 00:52:00 &#43;0000">May 10, 2024</time></a>
+		<a href="https://versun.me/2024/05/10/deepseek-xjpkey-findings.html" class="u-url"><time class="dt-published" datetime="2024-05-10 08:52:00 &#43;0800">May 10, 2024</time></a>
 
 		<div class="e-content">
 			 <p>DeepSeek虽然便宜，但内容审核也太严格了吧，基本不可用啊。<br>
@@ -185,7 +1291,7 @@ Uses This：使用的工具、服务、技术等</p>
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/04/223159.html" class="u-url"><time class="dt-published" datetime="2024-05-04 14:31:59 &#43;0000">May 4, 2024</time></a>
+		<a href="https://versun.me/2024/05/04/223159.html" class="u-url"><time class="dt-published" datetime="2024-05-04 22:31:59 &#43;0800">May 4, 2024</time></a>
 
 		<div class="e-content">
 			 <p>刚看完电影&lt;铃芽之旅&gt;，故事讲得很好，点到为止，不煽情不做作，很好看。
@@ -197,7 +1303,7 @@ Uses This：使用的工具、服务、技术等</p>
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/04/realpython.html" class="u-url"><time class="dt-published" datetime="2024-05-04 08:31:42 &#43;0000">May 4, 2024</time></a>
+		<a href="https://versun.me/2024/05/04/realpython.html" class="u-url"><time class="dt-published" datetime="2024-05-04 16:31:42 &#43;0800">May 4, 2024</time></a>
 
 		<div class="e-content">
 			 <p>realpython的内容是真不错，但一个月300多的价格下不了手啊……</p>
@@ -208,7 +1314,7 @@ Uses This：使用的工具、服务、技术等</p>
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/03/neato.html" class="u-url"><time class="dt-published" datetime="2024-05-02 22:57:28 &#43;0000">May 2, 2024</time></a>
+		<a href="https://versun.me/2024/05/03/neato.html" class="u-url"><time class="dt-published" datetime="2024-05-03 06:57:28 &#43;0800">May 3, 2024</time></a>
 
 		<div class="e-content">
 			 <p>期待<a href="https://neato.pub">Neato</a></p>
@@ -219,7 +1325,7 @@ Uses This：使用的工具、服务、技术等</p>
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/05/02/195616.html" class="u-url"><time class="dt-published" datetime="2024-05-02 11:56:16 &#43;0000">May 2, 2024</time></a>
+		<a href="https://versun.me/2024/05/02/195616.html" class="u-url"><time class="dt-published" datetime="2024-05-02 19:56:16 &#43;0800">May 2, 2024</time></a>
 
 		<div class="e-content">
 			 <p>每次在看大自然纪录片，比如&lt;地球&gt;时，恨不得游遍整个地球！<br>
@@ -268,7 +1374,7 @@ Uses This：使用的工具、服务、技术等</p>
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/04/29/roadmaps-ai.html" class="u-url"><time class="dt-published" datetime="2024-04-29 08:53:40 &#43;0000">Apr 29, 2024</time></a>
+		<a href="https://versun.me/2024/04/29/roadmaps-ai.html" class="u-url"><time class="dt-published" datetime="2024-04-29 16:53:40 &#43;0800">Apr 29, 2024</time></a>
 
 		<div class="e-content">
 			 <p>刚发现，专门做开发人员学习路线图的<a href="https://roadmap.sh/">Roadmaps</a>，添加了好多内容，<br>
@@ -451,7 +1557,7 @@ sudo mv b2-linux /usr/bin/b2
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/04/26/pegasusdjango-saas-htmxcssbulmatailwind.html" class="u-url"><time class="dt-published" datetime="2024-04-26 01:14:16 &#43;0000">Apr 26, 2024</time></a>
+		<a href="https://versun.me/2024/04/26/pegasusdjango-saas-htmxcssbulmatailwind.html" class="u-url"><time class="dt-published" datetime="2024-04-26 09:14:16 &#43;0800">Apr 26, 2024</time></a>
 
 		<div class="e-content">
 			 <p><a href="https://www.saaspegasus.com/">Pegasus</a>的Django SaaS模板看起来很不错啊<br>
@@ -519,7 +1625,7 @@ print( my_str<span style="color:#f92672">.</span>format(name<span style="color:#
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/04/25/justin-dukestripebuttondown.html" class="u-url"><time class="dt-published" datetime="2024-04-25 07:34:14 &#43;0000">Apr 25, 2024</time></a>
+		<a href="https://versun.me/2024/04/25/justin-dukestripebuttondown.html" class="u-url"><time class="dt-published" datetime="2024-04-25 15:34:14 &#43;0800">Apr 25, 2024</time></a>
 
 		<div class="e-content">
 			 <p>分享篇文章&lt;<a href="https://jmduke.com/posts/essays/two-years/">做为独立开发者的这两年</a>&gt;，作者Justin Duke从Stripe公司离职后，创办了Buttondown，做为独立开发者，工作生活难平衡，虽灵活但更孤独，而且收入并没有比工作时的多。
@@ -607,7 +1713,7 @@ Feed: <a href="https://versun.me/feed">rss</a>, <a href="https://versun.me/feed.
 	  <div class="h-entry">
 		
 
-		<a href="https://versun.me/2024/04/19/ai-chatdev.html" class="u-url"><time class="dt-published" datetime="2024-04-19 07:37:41 &#43;0000">Apr 19, 2024</time></a>
+		<a href="https://versun.me/2024/04/19/ai-chatdev.html" class="u-url"><time class="dt-published" datetime="2024-04-19 15:37:41 &#43;0800">Apr 19, 2024</time></a>
 
 		<div class="e-content">
 			 <p>发现一个很好玩的AI应用: ChatDev<br>
@@ -5061,7 +6167,21 @@ stress -c 4 -t 10m -v</p>
 
 
     
-    <script defer src="https://analytics.us.umami.is/script.js" data-website-id="e5343b24-09a2-45ab-a208-0063ee743463"></script>
+    <div  class="h-card" hidden>
+<span class="p-name">Versun Pan</span>
+<span class="p-honorific-prefix">Mr.</span>
+<span class="p-given-name">Versun</span>
+<span class="p-family-name">Pan</span>
+<span class="p-nickname">versun</span>
+<img class="u-photo" src="https://avatars.githubusercontent.com/u/2398708"/>
+<a class="u-url u-uid" href="https://versun.me">Versun's Blog</a>
+<a class="u-url" href="https://versun.me/@versun" rel="me">Matodon</a>
+<a class="u-url" href="https://x.com/versunpan">Twitter</a>
+<a class="u-email" href="mailto:me@versun.me"></a>
+<p class="p-note">INTJ | 伪全栈 | 在前后端反复横跳 | 运维小能手 | InfoSec爱好者 | Pentest菜鸡 </p>
+</div>
+
+<script defer src="https://analytics.us.umami.is/script.js" data-website-id="e5343b24-09a2-45ab-a208-0063ee743463"></script>
 
   </body>
 
