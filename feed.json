@@ -7,6 +7,50 @@
 	"items": [
 		
 			{
+				"id": "http://versun.micro.blog/2024/06/16/121502.html",
+				
+				"content_html": "<p>最近在看&lt;李光耀观天下&gt;，书内的观点犀利准确细致，最重要的是能用最简单的文字表达这些观点，虽然知道李光耀很厉害，但看了这书才知道，不止是厉害，简直是神人</p>\n",
+				"content_text": "最近在看<李光耀观天下>，书内的观点犀利准确细致，最重要的是能用最简单的文字表达这些观点，虽然知道李光耀很厉害，但看了这书才知道，不止是厉害，简直是神人\n",
+				"date_published": "2024-06-16T12:15:02+08:00",
+				"url": "https://versun.me/2024/06/16/121502.html",
+				"tags": ["review"]
+			},
+			{
+				"id": "http://versun.micro.blog/2024/06/11/githubyoutubedl-ytdlp-youtubedl.html",
+				
+				"content_html": "<p>疯狂的世界：曾经被Github封禁的youtube-dl，现在官方教你怎么下载和使用 yt-dlp (youtube-dl的分支)</p>\n<!-- raw HTML omitted -->\n",
+				"content_text": "疯狂的世界：曾经被Github封禁的youtube-dl，现在官方教你怎么下载和使用 yt-dlp (youtube-dl的分支)\n\n<img src=\"uploads/2024/2024-06-11-09-56-24.png\" width=\"600\" height=\"325\" alt=\"\">\n",
+				"date_published": "2024-06-11T09:57:15+08:00",
+				"url": "https://versun.me/2024/06/11/githubyoutubedl-ytdlp-youtubedl.html"
+			},
+			{
+				"id": "http://versun.micro.blog/2024/06/11/ghostactivitypub-buildinpublic-build.html",
+				
+				"content_html": "<p>没想到我竟然被Ghost的Activitypub开发日记吸引住了，写作风格生动有趣,  很有BuildInPublic的魅力。<br>\n对于任何想尝试Build In Public的人, 这些日记博文很有参考价值<br>\n<a href=\"https://activitypub.ghost.org\">Landing Page</a><br>\n<a href=\"https://activitypub.ghost.org/archive/\">Blog</a></p>\n",
+				"content_text": "没想到我竟然被Ghost的Activitypub开发日记吸引住了，写作风格生动有趣,  很有BuildInPublic的魅力。   \r\n对于任何想尝试Build In Public的人, 这些日记博文很有参考价值   \r\n[Landing Page](https://activitypub.ghost.org)   \r\n[Blog](https://activitypub.ghost.org/archive/)\n",
+				"date_published": "2024-06-11T09:52:19+08:00",
+				"url": "https://versun.me/2024/06/11/ghostactivitypub-buildinpublic-build.html",
+				"tags": ["discover"]
+			},
+			{
+				"id": "http://versun.micro.blog/2024/06/07/flickrflickr-flickypedia-flickr.html",
+				
+				"content_html": "<p>Flickr有一个<a href=\"https://www.flickr.org/\">基金会</a>，专门负责备份Flickr上无版权/共享的照片，确保百年后还能够访问。<br>\n为此还开发了一个工具<a href=\"https://www.flickr.org/tools/flickypedia/\">flickypedia</a>, 可以为Flickr上的照片添加描述然后备份到维基百科上。   <br>\n真的很羡慕有这么多公司愿意去做这种吃力不讨好的事，希望国内的公司也能有这种意识，中文内容真不应该再消失了</p>\n",
+				"content_text": "Flickr有一个[基金会](https://www.flickr.org/)，专门负责备份Flickr上无版权/共享的照片，确保百年后还能够访问。   \r\n为此还开发了一个工具[flickypedia](https://www.flickr.org/tools/flickypedia/), 可以为Flickr上的照片添加描述然后备份到维基百科上。      \r\n真的很羡慕有这么多公司愿意去做这种吃力不讨好的事，希望国内的公司也能有这种意识，中文内容真不应该再消失了   \n",
+				"date_published": "2024-06-07T09:58:41+08:00",
+				"url": "https://versun.me/2024/06/07/flickrflickr-flickypedia-flickr.html",
+				"tags": ["discover"]
+			},
+			{
+				"id": "http://versun.micro.blog/2024/06/07/jetbrainsdjango-django-flask.html",
+				
+				"content_html": "<p>JetBrains发布了<a href=\"https://blog.jetbrains.com/pycharm/2024/06/the-state-of-django/\">《2024年Django的现状》</a>报告。<br>\n有几个有趣的发现：</p>\n<ol>\n<li>每三个 Django 开发人员中就有一个使用 Flask 或 FastAPI</li>\n<li>在前端的选择中，htmx超过了Vue排在第三位，React和jQuery位列第一第二</li>\n<li>对于CSS框架，Django开发者仍然首选Bootstrap或Tailwind</li>\n<li>在所有受访者中，31-39岁的占 38%，21-29岁的占 30%，44%位于欧洲，19%位于北美，17%位于亚洲</li>\n</ol>\n",
+				"content_text": "JetBrains发布了[《2024年Django的现状》](https://blog.jetbrains.com/pycharm/2024/06/the-state-of-django/)报告。   \n有几个有趣的发现：   \n1. 每三个 Django 开发人员中就有一个使用 Flask 或 FastAPI   \n2. 在前端的选择中，htmx超过了Vue排在第三位，React和jQuery位列第一第二   \n3. 对于CSS框架，Django开发者仍然首选Bootstrap或Tailwind   \n4. 在所有受访者中，31-39岁的占 38%，21-29岁的占 30%，44%位于欧洲，19%位于北美，17%位于亚洲\n",
+				"date_published": "2024-06-07T09:07:48+08:00",
+				"url": "https://versun.me/2024/06/07/jetbrainsdjango-django-flask.html",
+				"tags": ["discover","django"]
+			},
+			{
 				"id": "http://versun.micro.blog/2024/06/03/pplxpagepromptsonnetopussonnet.html",
 				
 				"content_html": "<p>pplx上周在发布Page时，肯定也优化了prompt，今天用起来感觉质量高很多，平时要sonnet搭配opus才能解决一个复杂问题，早上问了几个sonnet都能很完美的解决，质量很高。</p>\n",
